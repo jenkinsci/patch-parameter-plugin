@@ -2,6 +2,7 @@ package org.jenkinsci.plugins.patch;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.console.HyperlinkNote;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
 import hudson.model.FileParameterValue;
@@ -35,7 +36,7 @@ public class PatchParameterValue extends FileParameterValue {
                 patch.delete();
                 Environment env = nested.setUp(build,launcher,listener);
                 if (patch.exists()) {
-                    listener.getLogger().println("Applying a patch");
+                    listener.getLogger().println("Applying "+ PatchNote.encodeTo("a patch"));
                     patch.act(new ApplyTask());
                 }
 

@@ -1,12 +1,13 @@
 package org.jenkinsci.plugins.patch;
 
+import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.console.HyperlinkNote;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
 import hudson.model.FileParameterValue;
 import hudson.tasks.BuildWrapper;
+import hudson.util.VariableResolver;
 import org.apache.commons.fileupload.FileItem;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -24,6 +25,16 @@ public class PatchParameterValue extends FileParameterValue {
     @DataBoundConstructor
     public PatchParameterValue(String name, FileItem file) {
         super(name, file);
+    }
+
+    @Override
+    public void buildEnvVars(AbstractBuild<?, ?> build, EnvVars env) {
+        // no environment variable
+    }
+
+    @Override
+    public VariableResolver<String> createVariableResolver(AbstractBuild<?, ?> build) {
+        return VariableResolver.NONE;
     }
 
     @Override

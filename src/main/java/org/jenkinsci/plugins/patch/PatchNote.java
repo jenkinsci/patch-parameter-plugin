@@ -30,7 +30,7 @@ public class PatchNote extends ConsoleNote {
             if (pa!=null) {
                 PatchParameterValue p = (PatchParameterValue) pa.getParameter("patch.diff");
                 if (p!=null) {
-                    text.addHyperlink(charPos,charPos+length,"../parameter/patch.diff/"+p.getOriginalFileName());
+                    text.addHyperlink(charPos,charPos+length,"parameters/parameter/patch.diff/"+p.getOriginalFileName());
                 }
             }
         }

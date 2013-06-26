@@ -41,4 +41,11 @@
     <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
     <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
   </scm>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://jenkins-ci.org/mit-license</url>
+    </license>
+  </licenses>
 </project>

@@ -23,7 +23,7 @@ class ApplyTask implements FileCallable<Void> {
             List<PatchReport> reports = patch.patch(false);
             for (PatchReport r : reports) {
                 if (r.getFailure()!=null)
-                    throw new IOException("Failed to patch "+r.getFile());
+                    throw new IOException("Failed to patch " + r.getFile(), r.getFailure());
             }
         } catch (PatchException e) {
             throw new IOException2("Failed to apply the patch: "+diff,e);

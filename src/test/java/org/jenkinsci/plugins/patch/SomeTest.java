@@ -10,12 +10,13 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.IOException;
+import static java.lang.System.lineSeparator;
 import java.util.List;
 
 /**
  * @author Kohsuke Kawaguchi
  */
-public class SomeTest {
+public class SomeTest {    
     @Rule
     public TemporaryFolder temp = new TemporaryFolder();
 
@@ -24,7 +25,7 @@ public class SomeTest {
         File dir = temp.newFolder();
 
         File foo = new File(dir, "Foo.txt");
-        FileUtils.writeStringToFile(foo,"aaa\nbbb\nccc\n");
+        FileUtils.writeStringToFile(foo,"aaa"+lineSeparator()+"bbb"+lineSeparator()+"ccc"+lineSeparator());
 
         File diff = new File(dir, "diff.txt");
         FileUtils.copyURLToFile(getClass().getResource("gitstyle.patch"), diff);
@@ -36,6 +37,6 @@ public class SomeTest {
                 throw new IOException("Failed to patch " + r.getFile(), r.getFailure());
         }
 
-        Assert.assertEquals("aaa\nbbb2\nccc\n",FileUtils.readFileToString(foo));
+        Assert.assertEquals("aaa"+lineSeparator()+"bbb2"+lineSeparator()+"ccc"+lineSeparator(),FileUtils.readFileToString(foo));
     }
 }

@@ -25,7 +25,8 @@ public class SomeTest {
         File dir = temp.newFolder();
 
         File foo = new File(dir, "Foo.txt");
-        FileUtils.writeStringToFile(foo,"aaa"+lineSeparator()+"bbb"+lineSeparator()+"ccc"+lineSeparator());
+        FileUtils.writeStringToFile(foo,
+            String.format("aaa%1$sbbb%1$sccc%1$s", lineSeparator()));
 
         File diff = new File(dir, "diff.txt");
         FileUtils.copyURLToFile(getClass().getResource("gitstyle.patch"), diff);
@@ -37,6 +38,7 @@ public class SomeTest {
                 throw new IOException("Failed to patch " + r.getFile(), r.getFailure());
         }
 
-        Assert.assertEquals("aaa"+lineSeparator()+"bbb2"+lineSeparator()+"ccc"+lineSeparator(),FileUtils.readFileToString(foo));
+        Assert.assertEquals(String.format("aaa%1$sbbb2%1$sccc%1$s", lineSeparator()),
+            FileUtils.readFileToString(foo));
     }
 }

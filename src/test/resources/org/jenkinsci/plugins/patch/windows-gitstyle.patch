@@ -1,0 +1,9 @@
+diff --git some/Foo.txt another/Foo.txt
+index 11111..22222 33333
+--- a/Foo.txt
++++ b/Foo.txt
+@@ -1,3 +1,3 @@ bogus
+ aaa
+-bbb
++bbb2
+ ccc

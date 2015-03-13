@@ -20,8 +20,25 @@ public class SomeTest {
     @Rule
     public TemporaryFolder temp = new TemporaryFolder();
 
+    /**
+     * Verify patch file created from Windows with LF line endings.
+     * @throws Exception 
+     */    
     @Test
-    public void foo() throws Exception {
+    public void testPatchFromUnix() throws Exception {
+        verifyPatch("unix");
+    }
+    
+    /**
+     * Verify patch file created from Windows with CRLF line endings.
+     * @throws Exception 
+     */
+    @Test
+    public void testPatchFromWindows() throws Exception {
+        verifyPatch("windows");
+    }    
+    
+    private void verifyPatch(final String osPrefix) throws Exception {
         File dir = temp.newFolder();
 
         File foo = new File(dir, "Foo.txt");
@@ -29,7 +46,7 @@ public class SomeTest {
             String.format("aaa%1$sbbb%1$sccc%1$s", lineSeparator()));
 
         File diff = new File(dir, "diff.txt");
-        FileUtils.copyURLToFile(getClass().getResource("gitstyle.patch"), diff);
+        FileUtils.copyURLToFile(getClass().getResource(osPrefix+"-gitstyle.patch"), diff);
 
         ContextualPatch patch = ContextualPatch.create(diff,dir);
         List<PatchReport> reports = patch.patch(false);
@@ -39,6 +56,6 @@ public class SomeTest {
         }
 
         Assert.assertEquals(String.format("aaa%1$sbbb2%1$sccc%1$s", lineSeparator()),
-            FileUtils.readFileToString(foo));
+            FileUtils.readFileToString(foo));        
     }
 }

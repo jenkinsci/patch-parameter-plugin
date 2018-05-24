@@ -68,5 +68,5 @@ public class PatchParameterDefinition extends FileParameterDefinition {
         }
     }
 
-    static final String LOCATION = "patch.diff";
+    static final String LOCATION = "patchDiff";
 }

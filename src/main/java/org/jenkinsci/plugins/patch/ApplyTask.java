@@ -5,7 +5,7 @@ import com.cloudbees.diff.ContextualPatch.PatchReport;
 import com.cloudbees.diff.PatchException;
 import hudson.FilePath.FileCallable;
 import hudson.remoting.VirtualChannel;
-import hudson.util.IOException2;
+import hudson.util.IOException;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ class ApplyTask implements FileCallable<Void> {
                     throw new IOException("Failed to patch " + r.getFile(), r.getFailure());
             }
         } catch (PatchException e) {
-            throw new IOException2("Failed to apply the patch: "+diff,e);
+            throw new IOException("Failed to apply the patch: "+diff,e);
         }
 
         return null;
